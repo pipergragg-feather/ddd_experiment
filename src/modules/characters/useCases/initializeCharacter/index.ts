@@ -1,0 +1,1 @@
+import {Character} from '../../domain/character'

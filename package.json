@@ -1,0 +1,54 @@
+{
+  "name": "randogame",
+  "version": "1.0.0",
+  "description": "randogame",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "tsc && open index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/rent-feather/randogame.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,css,json,md,ts}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "jest": {
+    "globals": {
+      "__TS_CONFIG__": "tsconfig.test.json"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.(ts)$": "./node_modules/ts-jest/preprocessor.js"
+    },
+    "testMatch": [
+      "**/tests/**/*.test.(ts|js)"
+    ],
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "dotenv": "^7.0.0"
+  },
+  "devDependencies": {
+    "husky": "^3.0.4",
+    "lint-staged": "^9.2.3",
+    "prettier": "^1.18.2",
+    "tslint": "^5.15.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.4.3"
+  }
+}
