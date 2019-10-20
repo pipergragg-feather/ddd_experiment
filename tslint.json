@@ -22,7 +22,7 @@
       "no-unused-expression": true,
       "no-unused-variable": true,
       "no-unreachable": true,
-      "no-use-before-declare": true,
+      "no-use-before-declare": false,
       "no-var-requires": false,
       "triple-equals": [true, "allow-null-check"],
       "typedef": [
