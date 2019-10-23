@@ -20,6 +20,6 @@ export class Health extends ValueObject<HealthProps> {
     if (this.isValidHp(maxHp)) {
       return ResultFactory.ok<Health>(new Health({ maxHp, currentHp: maxHp }));
     }
-    return ResultFactory.fail<Health>('Email address not valid');
+    return ResultFactory.fail<Health>('Invalid max hp');
   }
 }
