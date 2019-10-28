@@ -1,5 +1,4 @@
 import { ValueObject } from '../../../shared/domain/ValueObject';
-import { Result, ResultFactory } from '../../../shared/core/Result';
 
 export interface HealthProps {
   currentHp: number;
@@ -16,10 +15,10 @@ export class Health extends ValueObject<HealthProps> {
   private static isValidHp(maxHp: number) {
     return maxHp > 0;
   }
-  public static create(maxHp: number): Result<Health> {
+  public static create(maxHp: number) {
     if (this.isValidHp(maxHp)) {
-      return ResultFactory.ok<Health>(new Health({ maxHp, currentHp: maxHp }));
+      return new Health({ maxHp, currentHp: maxHp })
     }
-    return ResultFactory.fail<Health>('Invalid max hp');
+    return new Error('Invalid max hp');
   }
 }

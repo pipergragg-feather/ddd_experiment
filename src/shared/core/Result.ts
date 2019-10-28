@@ -1,18 +1,44 @@
-export type Result<T> = SuccessfulResult<T> | FailingResult<T>;
-
-export class ResultFactory<T> {
+export class Result<T> {
   public isSuccess: boolean;
   public isFailure: boolean;
   public error: T | string;
+  private _value: T;
 
-  private constructor() {}
+  public constructor({ isSuccess, error, value }: { isSuccess: boolean; error?: T | string; value?: T }) {
+    if (isSuccess && error) {
+      throw new Error('InvalidOperation: A result cannot be successful and contain an error');
+    }
+    if (!isSuccess && !error) {
+      throw new Error('InvalidOperation: A failing result needs to contain an error message');
+    }
 
-  public static ok<U>(value?: U): SuccessfulResult<U> {
-    return new SuccessfulResult<U>(value);
+    this.isSuccess = isSuccess;
+    this.isFailure = !isSuccess;
+    this.error = error as string | T;
+    this._value = value as T;
+
+    Object.freeze(this);
   }
 
-  public static fail<U>(error: string): FailingResult<U> {
-    return new FailingResult<U>(error);
+  public getValue(): T {
+    if (!this.isSuccess) {
+      console.log(this.error);
+      throw new Error("Can't get the value of an error result. Use 'errorValue' instead.");
+    }
+
+    return this._value;
+  }
+
+  public errorValue(): T {
+    return this.error as T;
+  }
+
+  public static ok<U>(value?: U): Result<U> {
+    return new Result<U>({ isSuccess: true, value: value });
+  }
+
+  public static fail<U>(error: string): Result<U> {
+    return new Result<U>({ isSuccess: true, error: error });
   }
 
   public static combine(results: Result<any>[]): Result<any> {
@@ -21,48 +47,7 @@ export class ResultFactory<T> {
         return result;
       }
     }
-    return ResultFactory.ok();
-  }
-}
-export class FailingResult<T> {
-  public isSuccess: boolean;
-  public isFailure: boolean;
-  public _error: T | string;
-
-  public constructor(error: T | string) {
-    this.isSuccess = false;
-    this.isFailure = true;
-    this._error = error;
-
-    Object.freeze(this);
-  }
-
-  public getValue() {
-    throw new Error("Can't get the value of an error result. Use 'errorValue' instead.");
-  }
-
-  public get error(): T {
-    return this._error as T;
-  }
-}
-export class SuccessfulResult<T> {
-  public isSuccess: boolean;
-  public isFailure: boolean;
-  private _value: T | undefined;
-
-  public constructor(value?: T) {
-    this.isSuccess = true;
-    this.isFailure = false;
-    this._value = value;
-
-    Object.freeze(this);
-  }
-
-  public getValue(): T | undefined {
-    return this._value;
-  }
-  public errorValue(): T {
-    throw new Error("Can't get the error of a successful result. Use 'getValue' instead.");
+    return Result.ok();
   }
 }
 

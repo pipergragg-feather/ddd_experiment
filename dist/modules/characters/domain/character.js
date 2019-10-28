@@ -1,10 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const AggregateRoot_1 = require("../../../shared/domain/AggregateRoot");
+const characterCreated_1 = require("./events/characterCreated");
 class Character extends AggregateRoot_1.AggregateRoot {
     constructor(props, id) {
         super(props, id);
     }
+    static create(props, id) {
+        const character = new Character(Object.assign({}, props));
+        character.addDomainEvent(new characterCreated_1.CharacterCreated(character));
+        return character;
+    }
 }
 exports.Character = Character;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2hhcmFjdGVyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vc3JjL21vZHVsZXMvY2hhcmFjdGVycy9kb21haW4vY2hhcmFjdGVyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBR0Esd0VBQXFFO0FBTXJFLE1BQWEsU0FBVSxTQUFRLDZCQUE2QjtJQUMxRCxZQUFvQixLQUFxQixFQUFFLEVBQW1CO1FBQzVELEtBQUssQ0FBQyxLQUFLLEVBQUUsRUFBRSxDQUFDLENBQUM7SUFDbkIsQ0FBQztDQUNGO0FBSkQsOEJBSUMifQ==
+//# sourceMappingURL=character.js.map

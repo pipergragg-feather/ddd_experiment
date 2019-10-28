@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Entity_1 = require("./Entity");
+const DomainEvents_1 = require("./events/DomainEvents");
 class AggregateRoot extends Entity_1.Entity {
     constructor() {
         super(...arguments);
@@ -15,6 +16,16 @@ class AggregateRoot extends Entity_1.Entity {
     clearEvents() {
         this._domainEvents.splice(0, this._domainEvents.length);
     }
+    addDomainEvent(domainEvent) {
+        this._domainEvents.push(domainEvent);
+        DomainEvents_1.DomainEvents.markAggregateForDispatch(this);
+        this.logDomainEventAdded(domainEvent);
+    }
+    logDomainEventAdded(domainEvent) {
+        const thisClass = Reflect.getPrototypeOf(this);
+        const domainEventClass = Reflect.getPrototypeOf(domainEvent);
+        console.info(`[Domain Event Created]:`, thisClass.constructor.name, '==>', domainEventClass.constructor.name);
+    }
 }
 exports.AggregateRoot = AggregateRoot;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQWdncmVnYXRlUm9vdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9zaGFyZWQvZG9tYWluL0FnZ3JlZ2F0ZVJvb3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSxxQ0FBa0M7QUFJbEMsTUFBc0IsYUFBaUIsU0FBUSxlQUFTO0lBQXhEOztRQUNVLGtCQUFhLEdBQW1CLEVBQUUsQ0FBQztJQWE3QyxDQUFDO0lBWEMsSUFBSSxFQUFFO1FBQ0osT0FBTyxJQUFJLENBQUMsR0FBRyxDQUFDO0lBQ2xCLENBQUM7SUFFRCxJQUFJLFlBQVk7UUFDZCxPQUFPLElBQUksQ0FBQyxhQUFhLENBQUM7SUFDNUIsQ0FBQztJQUVNLFdBQVc7UUFDaEIsSUFBSSxDQUFDLGFBQWEsQ0FBQyxNQUFNLENBQUMsQ0FBQyxFQUFFLElBQUksQ0FBQyxhQUFhLENBQUMsTUFBTSxDQUFDLENBQUM7SUFDMUQsQ0FBQztDQUNGO0FBZEQsc0NBY0MifQ==
+//# sourceMappingURL=AggregateRoot.js.map
