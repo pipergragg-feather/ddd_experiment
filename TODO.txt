@@ -13,8 +13,6 @@ Requirements:
 Architecture: 
     View requires:
         GameState
-        
-
 
 Ideas: 
     Quests
