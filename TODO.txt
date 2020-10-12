@@ -1,0 +1,31 @@
+Game structure: 
+
+Main loop 
+    - Game Context 
+        - 
+
+
+Requirements: 
+    GameState:
+        - Typed
+        - Saved as JSON document 
+
+Architecture: 
+    View requires:
+        GameState
+        
+
+
+Ideas: 
+    Quests
+    Rivals 
+    Skill Tree 
+    Inventory 
+    Multi-character combat 
+    Movement between areas 
+    Mining 
+    Soulsmithing 
+        - Requires remnant pieces + construct + madra
+    Madra 
+    Killing monsters + remnants 
+        - Harvesting constructs 

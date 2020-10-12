@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../../../src/modules/game/useCases/startGame/index.ts"],"names":[],"mappings":";;AAAA,0FAA8F;AAO9F,MAAa,IAAI;IACR,KAAK,CAAC,YAA0B;QACrC,MAAM,SAAS,GAAG,IAAI,gDAA0B,EAAE,CAAC,OAAO,CAAC,YAAY,CAAC,SAAS,CAAC,CAAA;QAClF,OAAO,EAAC,SAAS,EAAC,CAAC;IACrB,CAAC;CACF;AALD,oBAKC"}

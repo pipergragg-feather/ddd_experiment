@@ -3,10 +3,16 @@ import { AggregateRoot } from '../../../shared/domain/AggregateRoot';
 import { UniqueEntityID } from '../../../shared/domain/UniqueEntityID';
 import { CharacterCreated } from './events/characterCreated';
 import { CharacterAttacked } from './events/characterAttacked';
+import { Item } from '../../items/domain/item';
 
+export interface Inventory {
+  weightCapacity: number;
+  items: Item[];
+}
 interface CharacterProps {
   health: Health;
   name: string;
+  inventory: Inventory;
 }
 
 export class Character extends AggregateRoot<CharacterProps> {
@@ -20,7 +26,7 @@ export class Character extends AggregateRoot<CharacterProps> {
     return this.props.name;
   }
   public get description() {
-    return `${this.props.name}, with ${this.props.health.current}/${this.props.health.max}.`
+    return `${this.props.name}, with ${this.props.health.current}/${this.props.health.max}`;
   }
   public attack(character: Character) {
     character.props.health = new Health({
