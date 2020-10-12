@@ -6,6 +6,9 @@ class Character extends AggregateRoot_1.AggregateRoot {
     constructor(props, id) {
         super(props, id);
     }
+    get health() {
+        return this.props.health;
+    }
     static create(props, id) {
         const character = new Character(Object.assign({}, props));
         character.addDomainEvent(new characterCreated_1.CharacterCreated(character));

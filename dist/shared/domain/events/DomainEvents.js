@@ -52,7 +52,7 @@ class DomainEvents {
         }
     }
 }
+exports.DomainEvents = DomainEvents;
 DomainEvents.handlersMap = {};
 DomainEvents.markedAggregates = [];
-exports.DomainEvents = DomainEvents;
 //# sourceMappingURL=DomainEvents.js.map

@@ -11,6 +11,9 @@ export class Character extends AggregateRoot<CharacterProps> {
   private constructor(props: CharacterProps, id?: UniqueEntityID) {
     super(props, id);
   }
+  public get health(){
+    return this.props.health
+  }
   public static create(props: CharacterProps, id?: UniqueEntityID) {
     const character = new Character({ ...props });
 
