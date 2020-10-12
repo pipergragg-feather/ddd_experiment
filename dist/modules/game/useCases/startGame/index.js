@@ -4,7 +4,6 @@ const initializeCharacter_1 = require("../../../characters/useCases/initializeCh
 class Game {
     start(startGameDTO) {
         const character = new initializeCharacter_1.InitializeCharacterUseCase().execute(startGameDTO.character);
-        console.log({ character });
         return { character };
     }
 }

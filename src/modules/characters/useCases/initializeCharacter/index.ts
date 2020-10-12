@@ -7,6 +7,7 @@ export class InitializeCharacterUseCase {
     const healthOrError = Health.create(request.health)
     return Character.create({
       health: healthOrError,
+      name: request.name
     });
   }
 }
